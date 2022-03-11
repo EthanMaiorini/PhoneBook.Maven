@@ -1,11 +1,8 @@
 package com.zipcodewilmington.phonebook;
 
-import java.util.List;
-import java.util.ArrayList;
+import java.util.*;
 //import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.Map;
+
 
 /**
  * Created by leon on 1/23/18.
@@ -13,10 +10,11 @@ import java.util.Map;
  */
 public class PhoneBook {
 
+
     private final Map<String, List<String>> phonebook;
 
     public PhoneBook(Map<String, List<String>> map) {
-        this.phonebook = null;
+        this.phonebook = new TreeMap<String,List<String>>;
     }
 
     public PhoneBook() {
@@ -24,20 +22,29 @@ public class PhoneBook {
     }
 
     public void add(String name, String phoneNumber) {
+        List<String> numbers = phonebook.get(name);
+        numbers.add(phoneNumber);
+        phonebook.put(name,numbers);
     }
 
     public void addAll(String name, String... phoneNumbers) {
+        List<String> numbers = phonebook.get(name);
+        for(String s:phoneNumbers)
+        numbers.add(s);
+        phonebook.put(name,numbers);
     }
 
     public void remove(String name) {
+        phonebook.remove(name);
     }
 
     public Boolean hasEntry(String name) {
-        return null;
+        return phonebook.containsKey(name);
     }
 
     public List<String> lookup(String name) {
-        return null;
+       List<String> numbers = phonebook.get(name);
+        return numbers;
     }
 
     public String reverseLookup(String phoneNumber)  {
