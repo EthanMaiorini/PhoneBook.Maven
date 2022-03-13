@@ -23,12 +23,6 @@ public class PhoneBook {
     }
 
     public void add(String name, String phoneNumber) {
-//        List<String> numbers = new ArrayList<>();
-//        if (phonebook.get(name) != Collections.EMPTY_MAP) {
-//            numbers = phonebook.get(name);
-//        }
-//        numbers.add(phoneNumber);
-//        phonebook.put(name,numbers);
         if(phonebook.get(name)==null){
             phonebook.put(name,new ArrayList<String>());
         }
@@ -63,8 +57,12 @@ public class PhoneBook {
     }
 
     public String reverseLookup(String phoneNumber)  {
-
-        return null;
+        List<String> numbers = new ArrayList<>();
+            for (String name : phonebook.keySet()) {
+                if (phonebook.get(name).contains(phoneNumber))
+                    return name;
+            }
+            return null;
     }
 
     public List<String> getAllContactNames() {
@@ -77,7 +75,11 @@ public class PhoneBook {
     }
 
     public Map<String, List<String>> getMap() {
-        return (Map)phonebook.entrySet();
+        Map<String,List<String>> map = new HashMap<>();
+        for(String s:phonebook.keySet())
+            map.put(s,phonebook.get(s));
+
+        return map;
 
     }
 }
